@@ -103,7 +103,7 @@ export = async (
 
     if (isWatching) {
       // This is a build watcher
-      const watcher = clientResult as RollupWatcher
+      const watcher = clientResult
       let resolved = false
 
       // @ts-ignore
@@ -137,10 +137,8 @@ export = async (
     } else {
       // This is a normal one-off build
       const clientOutputs = (
-        Array.isArray(clientResult)
-          ? clientResult
-          : [clientResult as RollupOutput]
-      ).flatMap((result) => result.output)
+        Array.isArray(clientResult) ? clientResult : [clientResult]
+      ).flatMap((result) => (result as RollupOutput).output)
 
       // Get the index.html from the resulting bundle.
       indexHtmlTemplate = (
